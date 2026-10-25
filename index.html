@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="sq">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista e Student&#235;ve</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        padding: 36px 22px;
+        background: #f3f0ee;
+        color: #242121;
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.6;
+    }
+    .page-container { width: min(100%, 1100px); margin: 0 auto; }
+    .uni-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 22px;
+        padding: 12px 18px;
+        border: 1px solid #ad1f32;
+        border-radius: 8px;
+        color: #fff;
+        background: #ad1f32;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: 0 5px 14px #8b14252b;
+        transition: background 160ms ease, transform 160ms ease;
+    }
+    .uni-link:hover { background: #851629; transform: translateY(-2px); }
+    .uni-link:focus-visible { outline: 3px solid #d88992; outline-offset: 3px; }
+    .uni-icon { width: 19px; height: 19px; flex: 0 0 19px; }
+    .campus-photo-wrap { width: min(100%, 900px); margin: 0 auto 26px; }
+    .campus-photo {
+        display: block;
+        width: 100%;
+        height: clamp(220px, 36vw, 390px);
+        object-fit: cover;
+        object-position: center 55%;
+        border-radius: 14px;
+        box-shadow: 0 12px 30px #26121424;
+    }
+    .campus-photo-wrap figcaption { margin-top: 8px; color: #756b6b; font-size: .9rem; text-align: right; }
+    .page-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin: 24px auto 22px;
+        color: #24191a;
+        font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+        font-weight: 600;
+        line-height: 1.35;
+        text-align: center;
+    }
+    .title-icon { width: 34px; height: 34px; flex: 0 0 34px; color: #ad1f32; }
+    .criteria {
+        width: min(100%, 900px);
+        margin: 0 auto 26px;
+        padding: 20px 24px;
+        border: 1px solid #e5dfe0;
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: 0 8px 24px #2b10100d;
+    }
+    .criteria h2 { margin: 0 0 10px; color: #991b2b; font-size: 1.15rem; }
+    .criteria ul { margin: 0; padding-left: 1.25rem; }
+    .criteria li { margin: 6px 0; padding-left: 4px; color: #343033; }
+    .criteria li::marker { color: #a71930; }
+    .criteria li i { font-style: normal; }
+    .table-wrap { width: min(100%, 1000px); margin: 0 auto; overflow-x: auto; }
+    table { width: 100%; min-width: 620px; border-collapse: separate; border-spacing: 0 7px; }
+    th, td { padding: 14px 18px; text-align: center; }
+    thead th { color: #fff; background: #171717; font-size: .95rem; letter-spacing: .2px; }
+    thead th:first-child { border-radius: 11px 0 0 11px; }
+    thead th:last-child { border-radius: 0 11px 11px 0; }
+    tbody tr { background: #fff; transition: background-color 150ms ease; }
+    tbody tr:nth-child(even) { background: #f8f3f1; }
+    tbody tr:hover { background: #f4e6e7; }
+    tbody td { border-top: 1px solid #e7dddd; border-bottom: 1px solid #e7dddd; }
+    tbody td:first-child { border-left: 1px solid #e7dddd; border-radius: 9px 0 0 9px; color: #8f1829; font-weight: 700; }
+    tbody td:last-child { border-right: 1px solid #e7dddd; border-radius: 0 9px 9px 0; }
+    @media (max-width: 640px) {
+        body { padding: 22px 14px; }
+        .uni-link { margin-bottom: 16px; }
+        .campus-photo { height: 230px; }
+        .criteria { padding: 17px; }
+        th, td { padding: 12px 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+</style>
+</head>
+
+<body>
+<main class="page-container">
+    <a class="uni-link" href="https://uni-pr.edu/" target="_blank" rel="noopener noreferrer"><svg class="uni-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9 12 4l9 5M5 10v8m4-8v8m6-8v8m4-8v8M3 20h18M2 22h20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Universiteti i Prishtin&#235;s</span></a>
+    <figure class="campus-photo-wrap">
+        <img class="campus-photo" src="images/rektorati.jpeg" alt="Rektorati i Universitetit t� Prishtin�s" loading="lazy">
+        <figcaption>Rektorati i Universitetit te Prishtines</figcaption>
+    </figure>
+        <h1 class="page-title">
+        <svg class="title-icon" viewBox="0 0 48 48" aria-hidden="true">
+            <circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="M29 10 25 22 37 18 22 26 19 38 23 26 11 30Z" fill="currentColor"/>
+            <circle cx="24" cy="24" r="2" fill="#fff"/>
+        </svg>
+        <span>Lista e nx&#235;n&#235;sve t&#235; pranuar</span>
+    </h1>
+<section class="criteria" aria-labelledby="criteria-title">
+    <h2 id="criteria-title">Kriteret e pranimit</h2>
+    <ul type="disc">
+     <li><i>Shkolla e mesme duhet t&#235; jet&#235; e p&#235;rfunduar me vler&#235;n 10.</i></li>
+     <li><i>Studenti duhet t&#235; ket&#235; nj&#235; vler&#235; t&#235; pakt&#235;n 40 n&#235; testin e matures.</i></li>
+    </ul>
+</section>
+
+    <div class="table-wrap">
+    <table>
+        <thead>
+            <tr>
+                <th>Emri</th>
+                <th>Mbiemri</th>
+                <th>Mosha</th>
+                <th>Qyteti</th>
+                <th>Piket</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Diar</td>
+                <td>Kamisholli</td>
+                <td>15</td>
+                <td>Prishtin&#235;</td>
+                <td>47</td>
+            </tr>
+            <tr>
+                <td>Almir</td>
+                <td>Mustafaj</td>
+                <td>16</td>
+                <td>Prishtin&#235;</td>
+                <td>42</td>
+            </tr>
+            <tr>
+                <td>Amar</td>
+                <td>Mavriqi</td>
+                <td>17</td>
+                <td>Prishtin&#235;</td>
+                <td>49</td>
+            </tr>
+            <tr>
+                <td>Ardian</td>
+                <td>Rrustemi</td>
+                <td>18</td>
+                <td>Prishtin&#235;</td>
+                <td>44</td>
+            </tr>
+            <tr>
+                <td>Sudejs</td>
+                <td>Shala</td>
+                <td>17</td>
+                <td>Prishtin&#235;</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>Nazim</td>
+                <td>Besmiri</td>
+                <td>19</td>
+                <td>Prishtin&#235;</td>
+                <td>41</td>
+            </tr>
+            <tr>
+                <td>Ardit</td>
+                <td>Berisha</td>
+                <td>18</td>
+                <td>Prishtin&#235;</td>
+                <td>46</td>
+            </tr>
+            <tr>
+                <td>Erion</td>
+                <td>Krasniqi</td>
+                <td>21</td>
+                <td>Prizren</td>
+                <td>48</td>
+            </tr>
+            <tr>
+                <td>Leon</td>
+                <td>Gashi</td>
+                <td>17</td>
+                <td>Pej&#235;</td>
+                <td>43</td>
+            </tr>
+            <tr>
+                <td>Blend</td>
+                <td>Hoxha</td>
+                <td>20</td>
+                <td>Gjakov&#235;</td>
+                <td>45</td>
+            </tr>
+            <tr>
+                <td>Endrit</td>
+                <td>Shala</td>
+                <td>19</td>
+                <td>Gjilan</td>
+                <td>40</td>
+            </tr>
+            <tr>
+                <td>Alban</td>
+                <td>Bytyqi</td>
+                <td>22</td>
+                <td>Ferizaj</td>
+                <td>47</td>
+            </tr>
+            <tr>
+                <td>Rinor</td>
+                <td>Morina</td>
+                <td>16</td>
+                <td>Mitrovic&#235;</td>
+                <td>42</td>
+            </tr>
+            <tr>
+                <td>Drin</td>
+                <td>Hasani</td>
+                <td>23</td>
+                <td>Vushtrri</td>
+                <td>49</td>
+            </tr>
+            <tr>
+                <td>Arlind</td>
+                <td>Rexhepi</td>
+                <td>18</td>
+                <td>Podujev&#235;</td>
+                <td>44</td>
+            </tr>
+            <tr>
+                <td>Valon</td>
+                <td>Mehmeti</td>
+                <td>24</td>
+                <td>Rahovec</td>
+                <td>46</td>
+            </tr>
+
+            <!-- 10 personat e rinj -->
+            <tr>
+                <td>Fisnik</td>
+                <td>Shabani</td>
+                <td>20</td>
+                <td>Viti</td>
+                <td>43</td>
+            </tr>
+            <tr>
+                <td>Leart</td>
+                <td>Ismaili</td>
+                <td>17</td>
+                <td>Obiliq</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>Korab</td>
+                <td>Halili</td>
+                <td>19</td>
+                <td>Fush&#235; Kosov&#235;</td>
+                <td>45</td>
+            </tr>
+            <tr>
+                <td>Egzon</td>
+                <td>Rama</td>
+                <td>16</td>
+                <td>De&#231;an</td>
+                <td>48</td>
+            </tr>
+            <tr>
+                <td>Arbnor</td>
+                <td>Selimi</td>
+                <td>22</td>
+                <td>Suharek&#235;</td>
+                <td>41</td>
+            </tr>
+            <tr>
+                <td>Besart</td>
+                <td>Aliu</td>
+                <td>18</td>
+                <td>Ka&#231;anik</td>
+                <td>47</td>
+            </tr>
+            <tr>
+                <td>Rinald</td>
+                <td>Osmani</td>
+                <td>21</td>
+                <td>Istog</td>
+                <td>42</td>
+            </tr>
+            <tr>
+                <td>Altin</td>
+                <td>Qorri</td>
+                <td>15</td>
+                <td>Kamenic&#235;</td>
+                <td>49</td>
+            </tr>
+            <tr>
+                <td>Jeton</td>
+                <td>Bytyqi</td>
+                <td>23</td>
+                <td>Lipjan</td>
+                <td>44</td>
+            </tr>
+            <tr>
+                <td>Andi</td>
+                <td>Shatri</td>
+                <td>17</td>
+                <td>Malishev&#235;</td>
+                <td>46</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</main>
+</body>
+
+</html>
